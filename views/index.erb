@@ -1,0 +1,19 @@
+<html>
+  <body>
+  <div>Session ID: <%= get_checkout_session_id %></div>
+  <button onclick="goToStripe('<%= get_checkout_session_id %>')">Go to Checkout</button>
+  </body>
+</html>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  function goToStripe(sessionId) {
+    var stripe = Stripe("pk_test_51IVvoGGpCUdxdLKwR47PihupGDvhI7zXce6UqjsC5r8cemX0oEMgnUWf8tffTlSqmDDeU5FAt0EEdX49oteuFbxj00dOydt3Q5");
+
+    stripe.redirectToCheckout({
+      sessionId: sessionId
+    }).then(function (result) {
+      console.log("hitting the then with result of ", result);
+    });
+  }
+</script>
